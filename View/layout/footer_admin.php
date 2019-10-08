@@ -33,6 +33,13 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="<?=URL?>assets/js/argon.min.js"></script>
+  
+  <script>
+    $("#selectall").on("click", function() {  
+      $(".case").prop("checked", this.checked);  
+    });
+  </script>
+
   <script>
     // Facebook Pixel Code Don't Delete
     ! function(f, b, e, v, n, t, s) {

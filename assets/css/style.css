@@ -251,7 +251,6 @@
 }
 
 #all-user-container #all-user-content{
-    border: 1px solid blue;
     width:95%; 
     height: 100%;
     margin: 25px;
@@ -295,10 +294,18 @@
     background-color: #f1e1e1;
 }
 
+.table-user{
+    border: 1px solid #d4d0d0;
+    box-shadow: 2px 2px 8px #666;
+}
+
+.thead-user{
+    background-color: white;
+}
+
 /*FIN VER TODOS LOS USUARIOS*/
 
-
-
+  
 
 
 
