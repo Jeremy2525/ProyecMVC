@@ -4,7 +4,7 @@
 <div id="all-user-container">
     <div id="all-user-content">
         
-        <a href=""><p class="all-lot">Todos<span>(5)</span></p></a>
+        <a href="" class="all-a"><p class="all-lot">Todos<span>(5)</span></p></a>
         <a href=""><p class="all-lot">Administrador<span>(2)</span></p></a>
         <a href=""><p class="all-lot">Cliente<span>(3)</span></p></a>      
 
@@ -16,8 +16,8 @@
                 <input type="submit" class="btnn btnn-shape-round-extra-small btnn-size-extra-small btnn-letter-default all-user-btn-delete " value="Aplicar">
             </div>
 
-            <div>
-                <input type="search" class="input-user all-user-bus">
+            <div class="all-user-div-bus">
+                <input type="search" class="input-user all-user-bus" >
                 <input type="submit" class="btnn btnn-shape-round-extra-small btnn-size-extra-small btnn-letter-default all-user-btn-delete " value="Buscar usuario">
             </div>
 
