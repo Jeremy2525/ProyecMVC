@@ -1,13 +1,14 @@
 <?php require_once 'View/layout/header_admin.php';?>
 
 
+
 <div id="all-user-container">
     <div id="all-user-content">
         
         <a href="<?=URL?>Admin/Ver" class="all-a"><p class="all-lot">Todos<span>(<?=Utils::countUser('');?>)</span></p></a>
         <a href="<?=URL?>Admin/Ver&ct=1"><p class="all-lot">Administrador<span>(<?=Utils::countUser('1');?>)</span></p></a>
         <a href="<?=URL?>Admin/Ver&ct=2"><p class="all-lot">Cliente<span>(<?=Utils::countUser('2');?>)</span></p></a>
-
+        
         <form action="<?=URL?>Admin/Ver" method="post">
             <div>
                 <select name="" class="input-user all-user-delete" id="">
@@ -37,8 +38,8 @@
                 <?php foreach($usuario as $user): ?>
                     <tr>
                         <td scope="row"><input type="checkbox" class="case" name="case[]" id=""></td>
-                        <td><?=$user->name_user;?></td>
-                        <td><?=$user->nombre;?></td>
+                        <td><?=$user->name_user;?><nav><a href="<?=URL?>Admin/Profile&cod=<?=$user->name_user;?>">Edición</nav></p></td>
+                        <td><?=!empty($user->nombre)?$user->nombre:'---------';?></td>
                         <td><?=$user->email;?></td>
                         <td><?=$user->perfil;?></td>
                         <td><?=$user->creation_date;?></td>
@@ -47,8 +48,15 @@
                 </tbody>
             </table>
         </form>
+        <?php if(isset($_SESSION['registro']) == 'Complete'): ?>
+                <p style="color:green;">Usuario agregado correctamente</p>
+            <?php elseif(isset($_SESSION['registro']) == 'Failed'): ?>
+                <p style="color:red;">No se pudo agrgregar el usuario. Por favor reintentelo</p>
+        <?php endif; ?>
     </div>
 </div>
+
+<?=Utils::DeleteSesion('registro')?>
 
 
 

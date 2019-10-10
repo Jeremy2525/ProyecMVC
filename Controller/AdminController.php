@@ -11,11 +11,16 @@
 
         public function Nuevo(){
             Utils::isAdmin();
-            //$t = isset($_GET['t'])?$_GET['t']:'';
             require_once 'View/admin/new-user.php';
         }
 
         public function Profile(){
+            Utils::isAdmin();
+            $id = isset($_GET['cod'])?$_GET['cod']:'';
+            $usuario = new Usuario();
+            $usuario->setId($id);
+            $user = $usuario->getOne();
+
             require_once 'View/admin/perfil.php';  
         }
 
@@ -41,26 +46,32 @@
             Utils::isAdmin();
 
             if(isset($_POST)){
-               echo $tipo = isset($_POST['c'])?2:1;
-                $usuario = new Usuario();
-                $usuario->setIdTipo($tipo);
-                $usuario->setNombre($_POST['nombre']);
-                $usuario->setApellido($_POST['apellido']);
-                $usuario->setEmail($_POST['email']);
-                $usuario->setPass($_POST['pwd']);
-                $save = $usuario->add();
+                $tipo = isset($_POST['profile'])?$_POST['profile']:'';
+                
+                $name_user = !empty($_POST['name_user'])?$_POST['name_user']:'';
+                $correo_user = !empty($_POST['correo_user'])?$_POST['correo_user']:'';
+                $pass_user = !empty($_POST['pass_user'])?$_POST['pass_user']:'';
 
-                if($save){
-                    $_SESSION['registro'] = 'Complete';
+                if($name_user && $correo_user && $pass_user){
+                    $usuario = new Usuario();
+                    $usuario->setId($name_user);
+                    $usuario->setEmail($correo_user);
+                    $usuario->setNombre(isset($_POST['name'])?$_POST['name']:NULL);
+                    $usuario->setApellido(isset($_POST['firs_name'])?$_POST['firs_name']:NULL);
+                    $usuario->setPass($pass_user);
+                    $usuario->setIdTipo($tipo);
+
+                    $save = $usuario->add();
+
+                    if($save){
+                        $_SESSION['registro'] = 'Complete';
+                    }else{
+                        $_SESSION['registro'] = 'Failed';
+                    }
                 }else{
-                    $_SESSION['registro'] = 'Failed';
+                    $_SESSION['failed'] = 'failed';
                 }
-                    
-                if($_POST['c']){
-                    header('Location:'.URL.'admin/VerClientes');
-                }else{
-                    header('Location:'.URL.'admin/VerAdmin');
-                }
+                header('location:'.URL.'Admin/Ver');
                 
             }
 
@@ -70,23 +81,30 @@
             Utils::isAdmin();
 
             if(isset($_POST)){
-                $up = new Usuario(); 
-                $up->setNombre($_POST['nombre']);
-                $up->setApellido($_POST['apellido']);
-                $up->setEmail($_POST['email']);
-                $up->setId($_POST['id']);
-                $save = $up->Up();
-                
-                if($save){
-                    $_SESSION['actualizar'] = 'Complete';
-                }else{
-                    $_SESSION['actualizar'] = 'Failed';
-                }
 
-                if($_POST['c']){
-                    header('Location:'.URL.'admin/VerClientes');
-                }else{
-                    header('Location:'.URL.'admin/VerAdmin');
+                $name_user = !empty($_POST['name_user'])?$_POST['name_user']:'';
+                $correo_user = !empty($_POST['correo_user'])?$_POST['correo_user']:'';
+                $pass = !isset($_POST['pass'])?$_POST['pass']:'';
+
+                if($name_user && $correo_user){
+                    $up = new Usuario(); 
+                    $up->setId($name_user);
+                    $up->setEmail($correo_user);
+                    $up->setNombre(!empty($_POST['name'])?$_POST['name']:NULL);
+                    $up->setApellido(!empty($_POST['firs_name'])?$_POST['firs_name']:NULL);
+                    $up->setPass(!empty($_POST['passnew_user'])?$_POST['passnew_user']:$pass);
+                    $up->setIdTipo($_POST['profile']);
+                    $up->setBiografia(!empty($_POST['info_user'])?$_POST['info_user']:NULL);
+                    $up->setFoto(!empty($_POST['img_user'])?$_POST['img_user']:NULL);
+                    $save = $up->Up();
+                    
+                    if($save){
+                        $_SESSION['up'] = 'Complete';
+                    }else{
+                        $_SESSION['up'] = 'Failed';
+                    }
+
+                    header('location:'.URL.'Admin/Ver');
                 }
             }
         }

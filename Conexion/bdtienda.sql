@@ -96,7 +96,7 @@ CREATE TABLE CATEGORIA_PRODUCTOS(
 DROP TABLE IF EXISTS PERFIL;
 CREATE TABLE PERFIL(
 	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    nombre VARCHAR(100) NOT NULL
+   nombre VARCHAR(100) NOT NULL
 )ENGINE=InnoDB;
 
 INSERT INTO PERFIL VALUES(NULL,'Administrador');
@@ -194,17 +194,17 @@ idper INT, bgf VARCHAR(100), fot VARCHAR(100), tipo CHAR(2)
 )
 BEGIN
 	IF tipo='I' THEN
-		INSERT INTO USUARIOS VALUES(nuser,ema,nom,ape,pass,idper,NULL,NULL,CURDATE(),CURDATE());
+		INSERT INTO USUARIOS VALUES(nuser,ema,nom,ape,pass,idper,NULL,'user-default.png',CURDATE(),CURDATE());
 	ELSEIF tipo='A' THEN
 		UPDATE USUARIOS SET email=ema, nombre=nom, apellido=ape, pass=pass, idperfil=idper, biografia=bgf, foto=fot,update_date=CURDATE() WHERE name_user=nuser;
 	END IF; 	
 END$$
-DELIMITER $$
+DELIMITER $$	
 
 CALL SPS_ADDUP_USUARIO('jeremy','jeremy@jeremy.com','Jeremy','Ramirez','$2y$10$NYIYScv5N7ZaVAARCMMAYeJvTT/T.9Sv0aFw/m1tPARB/Je8TdHpu',1,NULL,NULL,'I');
 CALL SPS_ADDUP_USUARIO('juan','juan@juan.com','Juan','Nuñez','$2y$10$NYIYScv5N7ZaVAARCMMAYeJvTT/T.9Sv0aFw/m1tPARB/Je8TdHpu',2,NULL,NULL,'I');
 
- -- Contar usuarios --
+ -- Contar cantidad de usuarios --
 DELIMITER $$
 DROP PROCEDURE IF EXISTS SPS_COUNT_USUARIO $$
 CREATE PROCEDURE SPS_COUNT_USUARIO(
@@ -216,4 +216,9 @@ END$$
 DELIMITER $$
 
 CALL SPS_COUNT_USUARIO('');
+
+SELECT * FROM PERFIL
+
+
+
 

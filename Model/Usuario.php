@@ -7,6 +7,8 @@
         private $apellido;
         private $email;
         private $pass;
+        private $biografia;
+        private $foto;
         private $con;
 
         public function __construct()
@@ -44,6 +46,16 @@
             return $this->pass;
         }
 
+        public function getBiografia()
+        {
+            return $this->biografia;
+        }
+
+        public function getFoto()
+        {
+            return $this->foto;
+        }
+
         public function setId($id)
         {
             $this->id = $id;
@@ -73,14 +85,20 @@
         {
             $this->pass = password_hash($pass,PASSWORD_DEFAULT);
         }
+
+        public function setBiografia($biografia)
+        {
+            $this->biografia = $biografia;
+        }
+
+        public function setFoto($foto)
+        {
+            $this->foto = $foto;
+        }
     
         public function add(){
             $result = false;
-            $sql = "INSERT INTO USUARIOS VALUES(NULL,{$this->getIdTipo()},
-                                                    '{$this->getNombre()}',
-                                                    '{$this->getApellido()}',
-                                                    '{$this->getEmail()}',
-                                                    '{$this->getPass()}',CURDATE(),CURDATE())";
+            $sql = "CALL SPS_ADDUP_USUARIO('{$this->getId()}','{$this->getEmail()}','{$this->getNombre()}','{$this->getApellido()}','{$this->getPass()}',{$this->getIdTipo()},NULL,NULL,'I');";
             
             $add = $this->con->prepare($sql);
             $add->execute();
@@ -94,9 +112,8 @@
 
         public function Up(){
             $result = false;
-            $sql = "UPDATE USUARIOS SET nombre='{$this->getNombre()}', 
-                                        apellido='{$this->getApellido()}',
-                                        email='{$this->getEmail()}', update_date=CURDATE() WHERE id={$this->getId()}";
+            $sql = "CALL SPS_ADDUP_USUARIO('{$this->getId()}','{$this->getEmail()}','{$this->getNombre()}','{$this->getApellido()}',
+                                           '{$this->getPass()}',{$this->getIdTipo()},'{$this->getBiografia()}','{$this->getFoto()}','A')";
             
             $edit = $this->con->prepare($sql);
             $edit->execute();
@@ -143,6 +160,13 @@
             return $result;
         }
 
+        public function getCount($c){
+            $sql = "CALL SPS_COUNT_USUARIO('$c');";
+            $contar = $this->con->prepare($sql);
+            $contar->execute();
+            return $contar;
+        }
+        
         public function getAll($bus){
             $sql = "CALL SPS_BUS_USUARIO('$bus','B');";
             $usuario = $this->con->prepare($sql);
@@ -152,19 +176,22 @@
         }
 
         public function getOne(){
-            $sql = "SELECT * FROM USUARIOS WHERE id = {$this->getId()}";
+            $sql = "SELECT * FROM USUARIOS WHERE name_user = '{$this->getId()}'";
             $usuario = $this->con->prepare($sql);
             $usuario->execute();
             $usuarios = $usuario->fetch(PDO::FETCH_OBJ);
             return $usuarios;
         }
 
-        public function getCount($c){
-            $sql = "CALL SPS_COUNT_USUARIO('$c');";
-            $contar = $this->con->prepare($sql);
-            $contar->execute();
-            return $contar;
+        public function getPerfil(){
+            $sql = "SELECT * FROM PERFIL";
+            $perfil = $this->con->prepare($sql);
+            $perfil->execute();
+            $per = $perfil->fetchAll(PDO::FETCH_OBJ);
+            return $per;
         }
+
+        
         
     }
 

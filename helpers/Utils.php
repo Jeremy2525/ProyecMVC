@@ -25,6 +25,14 @@
             return $result;
         }
 
+        public static function allPerfil(){
+            require_once 'Model/Usuario.php';
+            $perfil = new Usuario();
+            $per = $perfil->getPerfil();
+            
+            return $per;
+        }
+
     }
     
 ?>

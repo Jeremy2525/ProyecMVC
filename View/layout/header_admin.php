@@ -39,7 +39,7 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header d-flex align-items-center">
-        <a class="navbar-brand" href="../../pages/dashboards/dashboard.html">
+        <a class="navbar-brand" href="">
           <img src="<?=URL?>assets/images/admin/blue.png" class="navbar-brand-img" alt="...">
         </a>
         <div class="ml-auto">
@@ -106,49 +106,6 @@
             </li>
 
             <li class="nav-item">
-              <a class="pasar nav-link" href="#navbar-mantenimiento" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
-                <i class="fas fa-toolbox"></i>
-                <span class="nav-link-text">Mantenimiento</span>
-              </a>
-              <div class="collapse" id="navbar-mantenimiento">
-                <ul class="nav nav-sm flex-column">
-                  
-                  <li class="nav-item">
-                    <a href="#navbar-admin" class="pasar nav-link" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-multilevel">
-                    <span class="nav-link-text">Administrador</span>
-                    </a>
-                    <div class="collapse show" id="navbar-admin">
-                      <ul class="nav nav-sm flex-column">
-                        <li class="nav-item">
-                          <a href="<?=URL?>Admin/VerAdmin" class="pasar nav-link "><i class="fas fa-eye man"></i><span>Ver</span></a>
-                        </li>
-                        <li class="pasar nav-item">
-                          <a href="<?=URL?>Admin/Nuevo&t=a" class="nav-link "><i class="fas fa-plus man"></i><span>Nuevo</span></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="#navbar-cliente" class="pasar nav-link" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-multilevel">
-                    <span class="nav-link-text">Clientes</span>
-                    </a>
-                    <div class="collapse show" id="navbar-cliente">
-                      <ul class="nav nav-sm flex-column">
-                        <li class="nav-item">
-                          <a href="<?=URL?>Admin/VerClientes" class="pasar nav-link "><i class="fas fa-eye man"></i><span>Ver</span></a>
-                        </li>
-                        <li class="pasar nav-item">
-                          <a href="<?=URL?>Admin/Nuevo&t=c" class="nav-link "><i class="fas fa-plus man"></i><span>Nuevo</span></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
-
-            <li class="nav-item">
               <a class="pasar nav-link" href="#navbar-usuario" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
                 <i class="fas fa-user-tie"></i>
                 <span class="nav-link-text">Usuarios</span>
@@ -162,7 +119,7 @@
                     <a href="<?=URL?>Admin/Nuevo" class="pasar nav-link">Añadir Nuevo</a>
                   </li>
                   <li class="nav-item">
-                    <a href="<?=URL?>Admin/Profile" class="pasar nav-link">Tu Perfil</a>
+                    <a href="<?=URL?>Admin/Profile&cod=<?=$_SESSION['identity']->name_user;?>" class="pasar nav-link">Tu Perfil</a>
                   </li>
                 </ul>
               </div>
@@ -298,86 +255,10 @@
               <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right py-0 overflow-hidden">
                 <!-- Dropdown header -->
                 <div class="px-3 py-3">
-                  <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.</h6>
+                  <h6 class="text-sm text-muted m-0">Tienes <strong class="text-primary">13</strong> notificaciones.</h6>
                 </div>
                 <!-- List group -->
                 <div class="list-group list-group-flush">
-                  <a href="#!" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <img alt="Image placeholder" src="<?=URL?>assets/images/admin/cliente/team-1.jpg" class="avatar rounded-circle">
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">Jhon Snow</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>2 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="#!" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <img alt="Image placeholder" src="<?=URL?>assets/images/admin/cliente/team-2.jpg" class="avatar rounded-circle">
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">Jhon Snow</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>3 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="#!" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <img alt="Image placeholder" src="<?=URL?>assets/images/admin/cliente/team-3.jpg" class="avatar rounded-circle">
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">Jhon Snow</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>5 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">Your posts have been liked a lot.</p>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="#!" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <img alt="Image placeholder" src="<?=URL?>assets/images/admin/cliente/team-4.jpg" class="avatar rounded-circle">
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">Jhon Snow</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>2 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                      </div>
-                    </div>
-                  </a>
                   <a href="#!" class="list-group-item list-group-item-action">
                     <div class="row align-items-center">
                       <div class="col-auto">
@@ -387,19 +268,19 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">Jhon Snow</h4>
+                            <h4 class="mb-0 text-sm">Juanito Limaña</h4>
                           </div>
                           <div class="text-right text-muted">
-                            <small>3 hrs ago</small>
+                            <small>Hacer 1 hora</small>
                           </div>
                         </div>
-                        <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                        <p class="text-sm mb-0">Nuvo reporte xd.</p>
                       </div>
                     </div>
                   </a>
                 </div>
                 <!-- View all -->
-                <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
+                <a href="#" class="dropdown-item text-center text-primary font-weight-bold py-3">Ver Todos</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -412,7 +293,7 @@
                     <span class="shortcut-media avatar rounded-circle bg-gradient-red">
                       <i class="ni ni-calendar-grid-58"></i>
                     </span>
-                    <small>Calendar</small>
+                    <small>Calendario</small>
                   </a>
                   <a href="#!" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
@@ -424,25 +305,25 @@
                     <span class="shortcut-media avatar rounded-circle bg-gradient-info">
                       <i class="ni ni-credit-card"></i>
                     </span>
-                    <small>Payments</small>
+                    <small>Pagos</small>
                   </a>
                   <a href="#!" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-green">
                       <i class="ni ni-books"></i>
                     </span>
-                    <small>Reports</small>
+                    <small>Reportes</small>
                   </a>
                   <a href="#!" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
                       <i class="ni ni-pin-3"></i>
                     </span>
-                    <small>Maps</small>
+                    <small>Mapa</small>
                   </a>
                   <a href="#!" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
                       <i class="ni ni-basket"></i>
                     </span>
-                    <small>Shop</small>
+                    <small>Tienda</small>
                   </a>
                 </div>
               </div>
@@ -453,7 +334,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="<?=URL?>assets/images/admin/cliente/team-4.jpg">
+                    <img alt="Image placeholder" src="<?=URL?>assets/images/admin/cliente/team-5.jpg">
                   </span>
                   <div class="media-body ml-2 d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold"><?=$_SESSION['identity']->nombre . ' ' . $_SESSION['identity']->apellido?></span>
