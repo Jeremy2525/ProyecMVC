@@ -20,26 +20,22 @@
         }
 
         public function Ver(){
+            Utils::isAdmin();
+
+            $bus = '';
+            if(isset($_POST['bus'])){
+                $bus = isset($_POST['txtbus'])?$_POST['txtbus']:'';
+            }
+
+            if(isset($_GET['ct'])){
+                $bus = isset($_GET['ct'])?$_GET['ct']:'';
+            }
+
+            $usuarios = new Usuario();
+            $usuario = $usuarios->getAll($bus);
             require_once 'View/admin/all-user.php';
         }
 
-        public function VerClientes(){
-            Utils::isAdmin();
-            $clientes = new Usuario();
-            $clientes->setIdTipo(2);
-            $cliente = $clientes->getAll();
-            
-            require_once 'View/admin/ListCliente.php';
-        }
-
-        public function VerAdmin(){
-            Utils::isAdmin();
-            $admin = new Usuario();
-            $admin->setIdTipo(1);
-            $admins = $admin->getAll();
-            
-            require_once 'View/admin/ListAdmin.php';
-        }
 
         public function add(){
             Utils::isAdmin();

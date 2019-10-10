@@ -37,5 +37,4 @@ if(class_exists($nombre_controller)){
 
 //require_once 'View/layout/footer.php';
 
-
 ?>

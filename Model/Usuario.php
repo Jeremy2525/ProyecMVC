@@ -124,7 +124,7 @@
             $result = false;
             $email = $this->getEmail();
 
-            $sql = "SELECT * FROM USUARIOS WHERE email = '$email'";
+            $sql = "CALL SPS_BUS_USUARIO('$email','B')";
 
             $login = $this->con->prepare($sql);
             $login->execute();
@@ -143,11 +143,11 @@
             return $result;
         }
 
-        public function getAll(){
-            $sql = "SELECT * FROM USUARIOS WHERE idperfil={$this->getIdTipo()} ORDER BY id DESC";
+        public function getAll($bus){
+            $sql = "CALL SPS_BUS_USUARIO('$bus','B');";
             $usuario = $this->con->prepare($sql);
             $usuario->execute();
-            $usuarios = $usuario->fetchAll(PDO::FETCH_OBJ); 
+            $usuarios = $usuario->fetchAll(PDO::FETCH_OBJ);
             return $usuarios;
         }
 
@@ -157,6 +157,13 @@
             $usuario->execute();
             $usuarios = $usuario->fetch(PDO::FETCH_OBJ);
             return $usuarios;
+        }
+
+        public function getCount($c){
+            $sql = "CALL SPS_COUNT_USUARIO('$c');";
+            $contar = $this->con->prepare($sql);
+            $contar->execute();
+            return $contar;
         }
         
     }

@@ -1,29 +1,29 @@
 DROP DATABASE IF EXISTS TIENDAONLINE;
 CREATE DATABASE TIENDAONLINE;
-USE TIENDAONLINE;
+USE TIENDAONLINE; 
 
 DROP TABLE IF EXISTS PRODUCTOS;
 CREATE TABLE PRODUCTOS(
-	`id` INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `modelo` VARCHAR(50),
-    `precio` DOUBLE NOT NULL,
-    `serie` VARCHAR(50),
-    `genero` VARCHAR(20),
-    `movimiento` VARCHAR(100),
-    `modelo_maquina` VARCHAR(100),
-    `detalle` VARCHAR(1500),
-    `stock` INT NOT NULL
+	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+   modelo VARCHAR(50),
+   precio DOUBLE NOT NULL,
+   serie VARCHAR(50),
+   genero VARCHAR(20),
+   movimiento VARCHAR(100),
+   modelo_maquina VARCHAR(100),
+   detalle VARCHAR(1500),
+   stock INT NOT NULL
     
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS CAJA;
 CREATE TABLE CAJA(
 	id	INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `idproducto` INT,
-	`tamano_case` VARCHAR(100),
-    `ancho_case` VARCHAR(100),
-    `material` VARCHAR(200),
-    `forma_case` VARCHAR(200),
+   idproducto INT,
+	tamano_case VARCHAR(100),
+   ancho_case VARCHAR(100),
+   material VARCHAR(200),
+   forma_case VARCHAR(200),
     
     CONSTRAINT fk_caja_producto FOREIGN KEY (idproducto) REFERENCES PRODUCTOS(id)
 )ENGINE=InnoDB;
@@ -31,13 +31,13 @@ CREATE TABLE CAJA(
 DROP TABLE IF EXISTS DIAL;
 CREATE TABLE DIAL(
 	id	INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `idproducto` INT,
-	`tipo_dial` VARCHAR(200),
-    `color_dial` VARCHAR(200),
-    `cristal_dial` VARCHAR(200),
-    `dial_sub` VARCHAR(200),
-    `color_bisel` VARCHAR(200),
-    `material_bisel` VARCHAR(200),
+   idproducto INT,
+	tipo_dial VARCHAR(200),
+   color_dial VARCHAR(200),
+   cristal_dial VARCHAR(200),
+   dial_sub VARCHAR(200),
+   color_bisel VARCHAR(200),
+   material_bisel VARCHAR(200),
     
     CONSTRAINT fk_dial_producto FOREIGN KEY (idproducto) REFERENCES PRODUCTOS(id)
 )ENGINE=InnoDB;
@@ -45,11 +45,11 @@ CREATE TABLE DIAL(
 DROP TABLE IF EXISTS CORREA;
 CREATE TABLE CORREA(
 	id	INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `idproducto` INT,
-	`material_correa` VARCHAR(200),
-    `color_correa` VARCHAR(200),
-    `ancho_correa` VARCHAR(100),
-    `seguro_correa` VARCHAR(200),
+   idproducto	INT,
+	material_correa VARCHAR(200),
+   color_correa VARCHAR(200),
+   ancho_correa VARCHAR(100),
+   seguro_correa VARCHAR(200),
     
     CONSTRAINT fk_correa_producto FOREIGN KEY (idproducto) REFERENCES PRODUCTOS(id)
 )ENGINE=InnoDB;
@@ -57,11 +57,11 @@ CREATE TABLE CORREA(
 DROP TABLE IF EXISTS CARACTERISTICAS;
 CREATE TABLE CARACTERISTICAS(
 	id	INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `idproducto` INT,
-	`resistencia_agua` VARCHAR(200),
-    `calendario` VARCHAR(200),
-    `funciones` VARCHAR(250),
-    `caracteristicas` VARCHAR(250),
+   idproducto INT,
+	resistencia_agua VARCHAR(200),
+   calendario VARCHAR(200),
+   funciones VARCHAR(250),
+   caracteristicas VARCHAR(250),
     
     CONSTRAINT fk_caracteristicas_producto FOREIGN KEY (idproducto) REFERENCES PRODUCTOS(id)
 )ENGINE=InnoDB;
@@ -69,10 +69,10 @@ CREATE TABLE CARACTERISTICAS(
 DROP TABLE IF EXISTS INFO_ADICIONAL;
 CREATE TABLE INFO_ADICIONAL(
 	id	INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `idproducto` INT,
-	`upc_ean` VARCHAR(20),
-    `incluye` VARCHAR(200),
-    `garantia` VARCHAR(200),
+   idproducto INT,
+	upc_ean VARCHAR(20),
+   incluye VARCHAR(200),
+   garantia VARCHAR(200),
     
     CONSTRAINT fk_infoadicinal_producto FOREIGN KEY (idproducto) REFERENCES PRODUCTOS(id)
 )ENGINE=InnoDB;
@@ -105,45 +105,46 @@ INSERT INTO PERFIL VALUES(NULL,'Cliente');
 
 DROP TABLE IF EXISTS USUARIOS;
 CREATE TABLE USUARIOS(
-	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    idperfil INT,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    pass VARCHAR(100) NOT NULL,
-    creation_date DATE NOT NULL,
-    update_date DATE NOT NULL,
+	name_user VARCHAR(100) PRIMARY KEY NOT NULL,
+   email VARCHAR(100) NOT NULL UNIQUE,
+   nombre VARCHAR(100) NULL,
+   apellido VARCHAR(100) NULL,
+   pass VARCHAR(100) NOT NULL,
+   idperfil INT NOT NULL,
+   biografia VARCHAR(255) NULL,
+   foto VARCHAR(255) NULL,
+   
+   creation_date DATE NOT NULL,
+   update_date DATE NOT NULL,
     
-    CONSTRAINT fk_usuarios_perfil FOREIGN KEY (idperfil) REFERENCES PERFIL(id)
+   CONSTRAINT fk_usuarios_perfil FOREIGN KEY (idperfil) REFERENCES PERFIL(id)
 )ENGINE=InnoDB;
-
-INSERT INTO USUARIOS VALUES(NULL,1,'ADMIN','ADMIN','admin@admin.com','$2y$10$khQh4rwU4D.7NL3RuYIKxuZFae/e.1CB3T85tQdeumYZZTlgHL7dC',CURDATE(),CURDATE());
 
 DROP TABLE IF EXISTS SISTEMA_PAGO;
 CREATE TABLE SISTEMA_PAGO(
 	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    nombre VARCHAR(100) NOT NULL
+   nombre VARCHAR(100) NOT NULL
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS CIUDAD;
 CREATE TABLE CIUDAD(
 	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    nombre VARCHAR(100) NOT NULL
+   nombre VARCHAR(100) NOT NULL
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS ORDEN;
 CREATE TABLE ORDEN(
 	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    idusuario INT,
-    idsistema_pago INT,
-    idciudad INT,
-    fecha DATETIME,
-    direccion_envio VARCHAR(45),
-    telefono_envio VARCHAR(10),
+   name_user VARCHAR(100),
+   idsistema_pago INT,
+   idciudad INT,
+   fecha DATETIME,
+   direccion_envio VARCHAR(45),
+   telefono_envio VARCHAR(10),
 	
-    CONSTRAINT fk_orden_usuario FOREIGN KEY (idusuario) REFERENCES USUARIOS(id),
-    CONSTRAINT fk_orden_sispago FOREIGN KEY (idsistema_pago) REFERENCES SISTEMA_PAGO(id),
-    CONSTRAINT fk_orden_ciudad FOREIGN KEY (idciudad) REFERENCES CIUDAD(id)
+   CONSTRAINT fk_orden_usuario FOREIGN KEY (name_user) REFERENCES USUARIOS(name_user),
+   CONSTRAINT fk_orden_sispago FOREIGN KEY (idsistema_pago) REFERENCES SISTEMA_PAGO(id),
+   CONSTRAINT fk_orden_ciudad FOREIGN KEY (idciudad) REFERENCES CIUDAD(id)
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS ORDEN_DETALLE;
@@ -161,11 +162,58 @@ CREATE TABLE ORDEN_DETALLE(
 
 
 
+/* Consultas almacenadas de usuarios*/
 
+-- Buscar y eliminar usuarios --
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS SPS_BUS_USUARIO $$
+CREATE PROCEDURE SPS_BUS_USUARIO
+(
+	bus VARCHAR(50), tipo CHAR(2)
+)
+BEGIN
+	IF tipo='B' THEN
+		SELECT name_user,email,U.nombre,apellido,pass,idperfil,biografia,foto,creation_date,update_date,P.nombre AS 'perfil' FROM USUARIOS U
+		INNER JOIN PERFIL P ON U.idperfil=P.id 
+		WHERE name_user LIKE CONCAT('%',bus,'%') OR email LIKE CONCAT('%',bus,'%') OR U.idperfil LIKE CONCAT('%',bus,'%') OR U.nombre LIKE CONCAT('%',bus,'%') OR apellido LIKE CONCAT('%',bus,'%') ORDER BY creation_date DESC;
+	ELSEIF tipo='D' THEN
+		DELETE FROM USUARIOS WHERE name_user=bus;
+	END IF;
+END$$
+DELIMITER $$
 
+CALL SPS_BUS_USUARIO('','B');
 
+-- Insertar y Actualizar usuarios --
+DELIMITER $$
+DROP PROCEDURE IF EXISTS SPS_ADDUP_USUARIO $$
+CREATE PROCEDURE SPS_ADDUP_USUARIO
+(nuser VARCHAR(100), ema VARCHAR(100), nom VARCHAR(100), ape VARCHAR(100), pass VARCHAR(100),
+idper INT, bgf VARCHAR(100), fot VARCHAR(100), tipo CHAR(2)
+)
+BEGIN
+	IF tipo='I' THEN
+		INSERT INTO USUARIOS VALUES(nuser,ema,nom,ape,pass,idper,NULL,NULL,CURDATE(),CURDATE());
+	ELSEIF tipo='A' THEN
+		UPDATE USUARIOS SET email=ema, nombre=nom, apellido=ape, pass=pass, idperfil=idper, biografia=bgf, foto=fot,update_date=CURDATE() WHERE name_user=nuser;
+	END IF; 	
+END$$
+DELIMITER $$
 
+CALL SPS_ADDUP_USUARIO('jeremy','jeremy@jeremy.com','Jeremy','Ramirez','$2y$10$NYIYScv5N7ZaVAARCMMAYeJvTT/T.9Sv0aFw/m1tPARB/Je8TdHpu',1,NULL,NULL,'I');
+CALL SPS_ADDUP_USUARIO('juan','juan@juan.com','Juan','Nuñez','$2y$10$NYIYScv5N7ZaVAARCMMAYeJvTT/T.9Sv0aFw/m1tPARB/Je8TdHpu',2,NULL,NULL,'I');
 
+ -- Contar usuarios --
+DELIMITER $$
+DROP PROCEDURE IF EXISTS SPS_COUNT_USUARIO $$
+CREATE PROCEDURE SPS_COUNT_USUARIO(
+	idper CHAR(3)
+)
+BEGIN
+	SELECT COUNT(*) AS 'count' FROM USUARIOS WHERE idperfil LIKE CONCAT('%',idper,'%');
+END$$
+DELIMITER $$
 
+CALL SPS_COUNT_USUARIO('');
 
