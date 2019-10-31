@@ -84,15 +84,23 @@
 
                 $name_user = !empty($_POST['name_user'])?$_POST['name_user']:'';
                 $correo_user = !empty($_POST['correo_user'])?$_POST['correo_user']:'';
-                $pass = !isset($_POST['pass'])?$_POST['pass']:'';
-
+                $pass = !empty($_POST['pass'])?$_POST['pass']:'';
+               
                 if($name_user && $correo_user){
+                    if(!empty($_POST['passnew_user'])){
+                      echo $verifi = $_POST['passnew_user']; 
+                      $ve=true;
+                    }elseif(empty($_POST['passnew_user'])){
+                        echo $verifi = $pass; 
+                        $ve = false;
+                    }
+                    
                     $up = new Usuario(); 
                     $up->setId($name_user);
                     $up->setEmail($correo_user);
                     $up->setNombre(!empty($_POST['name'])?$_POST['name']:NULL);
                     $up->setApellido(!empty($_POST['firs_name'])?$_POST['firs_name']:NULL);
-                    $up->setPass(!empty($_POST['passnew_user'])?$_POST['passnew_user']:$pass);
+                    $up->setPass($verifi,$ve);
                     $up->setIdTipo($_POST['profile']);
                     $up->setBiografia(!empty($_POST['info_user'])?$_POST['info_user']:NULL);
                     $up->setFoto(!empty($_POST['img_user'])?$_POST['img_user']:NULL);

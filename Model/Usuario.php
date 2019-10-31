@@ -81,9 +81,13 @@
             $this->email = $email;
         }
 
-        public function setPass($pass)
+        public function setPass($pass,$ve=true)
         {
-            $this->pass = password_hash($pass,PASSWORD_DEFAULT);
+            if($ve){
+                $this->pass = password_hash($pass,PASSWORD_DEFAULT);
+            }else{
+                $this->pass = $pass;
+            }
         }
 
         public function setBiografia($biografia)
