@@ -36,11 +36,14 @@
                 $bus = isset($_GET['ct'])?$_GET['ct']:'';
             }
 
+            if(isset($_POST['exec']) && $_POST['action'] == "B"){
+                return $this->Delete();
+            }
+
             $usuarios = new Usuario();
             $usuario = $usuarios->getAll($bus);
             require_once 'View/admin/all-user.php';
         }
-
 
         public function add(){
             Utils::isAdmin();
@@ -119,6 +122,8 @@
 
         public function Delete(){
             Utils::isAdmin();
+            echo "borrando";
+            die();
             $usuario = new Usuario();
             $usuario->setId($_GET['id']);
             

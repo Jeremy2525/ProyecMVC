@@ -11,11 +11,11 @@
         
         <form action="<?=URL?>Admin/Ver" method="post">
             <div>
-                <select name="" class="input-user all-user-delete" id="">
+                <select name="action" class="input-user all-user-delete" id="">
                     <option value="">Acciones</option>
-                    <option value="">Borrar</option>
+                    <option value="B">Borrar</option>
                 </select>
-                <input type="submit" class="btnn btnn-shape-round-extra-small btnn-size-extra-small btnn-letter-default all-user-btn-delete " value="Aplicar">
+                <input type="submit" name="exec" class="btnn btnn-shape-round-extra-small btnn-size-extra-small btnn-letter-default all-user-btn-delete " value="Aplicar">
             </div>
 
             <div class="all-user-div-bus">
@@ -37,7 +37,7 @@
                 <tbody>
                 <?php foreach($usuario as $user): ?>
                     <tr>
-                        <td scope="row"><input type="checkbox" class="case" name="case[]" id=""></td>
+                        <td scope="row"><input type="checkbox" class="case" value="<?=$user->name_user;?>" name="case[]" id=""></td>
                         <td><?=$user->name_user;?><nav><a href="<?=URL?>Admin/Profile&cod=<?=$user->name_user;?>">Edición</nav></p></td>
                         <td><?=!empty($user->nombre)?$user->nombre:'---------';?></td>
                         <td><?=$user->email;?></td>
